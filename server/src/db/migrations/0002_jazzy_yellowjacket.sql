@@ -1,0 +1,1 @@
+ALTER TABLE "ticket_services" ADD CONSTRAINT "ticket_services_ticket_id_service_id_pk" PRIMARY KEY("ticket_id","service_id");
