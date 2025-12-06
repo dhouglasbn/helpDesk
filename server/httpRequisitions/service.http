@@ -1,0 +1,38 @@
+# Variables
+@baseUrl = http://localhost:3333
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQ5ODc5NDUsImV4cCI6MTc2NDk5MTU0NX0.exVZRdo1fy7hFoyN_9T9JrMRh18KlI5x2uLRtFU9Fdw
+
+###
+
+# create service
+# @name createService
+POST {{baseUrl}}/services
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Desentupir ralo",
+  "price": 200.0
+}
+
+###
+
+# update service
+# @name updateService
+PUT {{baseUrl}}/services/9386ea81-b6ad-4538-8c6c-c1afe6a5c720
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Desentupir ralo",
+  "price": 250.0
+}
+
+###
+
+# deactivate service
+# @name deactivateService
+DELETE {{baseUrl}}/services/9386ea81-b6ad-4538-8c6c-c1afe6a5c720
+Authorization: Bearer {{token}}

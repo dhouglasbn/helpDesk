@@ -1,6 +1,6 @@
 {
-  "id": "5ab2d39e-7e89-4352-9511-417c9281011d",
-  "prevId": "bbbd89c3-18c9-4765-8698-401fddd8982d",
+  "id": "9f0c1ba3-e3ba-4f23-b2d8-787556277e93",
+  "prevId": "8f8f2e1c-12c8-495f-b121-0707311e9144",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -26,6 +26,13 @@
           "type": "numeric",
           "primaryKey": false,
           "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
         }
       },
       "indexes": {},
@@ -66,8 +73,12 @@
           "name": "technician_availability_user_id_users_id_fk",
           "tableFrom": "technician_availability",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -130,8 +141,12 @@
           "name": "tickets_client_id_users_id_fk",
           "tableFrom": "tickets",
           "tableTo": "users",
-          "columnsFrom": ["client_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "client_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -139,8 +154,12 @@
           "name": "tickets_tech_id_users_id_fk",
           "tableFrom": "tickets",
           "tableTo": "users",
-          "columnsFrom": ["tech_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "tech_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -174,8 +193,12 @@
           "name": "ticket_services_ticket_id_tickets_id_fk",
           "tableFrom": "ticket_services",
           "tableTo": "tickets",
-          "columnsFrom": ["ticket_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "ticket_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -183,8 +206,12 @@
           "name": "ticket_services_service_id_services_id_fk",
           "tableFrom": "ticket_services",
           "tableTo": "services",
-          "columnsFrom": ["service_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "service_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -192,7 +219,10 @@
       "compositePrimaryKeys": {
         "ticket_services_ticket_id_service_id_pk": {
           "name": "ticket_services_ticket_id_service_id_pk",
-          "columns": ["ticket_id", "service_id"]
+          "columns": [
+            "ticket_id",
+            "service_id"
+          ]
         }
       },
       "uniqueConstraints": {},
@@ -250,7 +280,9 @@
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         }
       },
       "policies": {},
@@ -262,12 +294,20 @@
     "public.ticket_status": {
       "name": "ticket_status",
       "schema": "public",
-      "values": ["aberto", "em_atendimento", "encerrado"]
+      "values": [
+        "aberto",
+        "em_atendimento",
+        "encerrado"
+      ]
     },
     "public.user_role": {
       "name": "user_role",
       "schema": "public",
-      "values": ["admin", "tech", "client"]
+      "values": [
+        "admin",
+        "tech",
+        "client"
+      ]
     }
   },
   "schemas": {},

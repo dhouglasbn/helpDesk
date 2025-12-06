@@ -22,6 +22,20 @@
       "when": 1764726857789,
       "tag": "0002_jazzy_yellowjacket",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1764988096170,
+      "tag": "0003_far_deathbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1764988292065,
+      "tag": "0004_salty_jubilee",
+      "breakpoints": true
     }
   ]
 }

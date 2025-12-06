@@ -7,12 +7,12 @@ VALUES (
   'admin'
 ) ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO services (id, title, price) VALUES
-  ('4878508a-2fd4-4005-8418-83fce08c0e50', 'Instalação e atualização de softwares', 100.00),
-  ('2f72feca-f0c9-4b09-ab63-f2b3af3d8950', 'Instalação e atualização de hardwares', 150.00),
-  ('08bc85dc-e13f-472d-a156-4d6cc026934e', 'Diagnóstico e remoção de vírus', 120.00),
-  ('099cb99d-7a79-44cd-832f-9d8e4729a06b', 'Suporte a impressoras', 80.00),
-  ('33807cc5-731e-4bf4-888c-d56a27745ef5', 'Suporte a periféricos', 60.00)
+INSERT INTO services (id, title, price, active) VALUES
+  ('4878508a-2fd4-4005-8418-83fce08c0e50', 'Instalação e atualização de softwares', 100.0, true),
+  ('2f72feca-f0c9-4b09-ab63-f2b3af3d8950', 'Instalação e atualização de hardwares', 150.0, true),
+  ('08bc85dc-e13f-472d-a156-4d6cc026934e', 'Diagnóstico e remoção de vírus', 120.0, true),
+  ('099cb99d-7a79-44cd-832f-9d8e4729a06b', 'Suporte a impressoras', 80.0, true),
+  ('33807cc5-731e-4bf4-888c-d56a27745ef5', 'Suporte a periféricos', 60.0, true)
   ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO users (id, name, email, password_hash, role, picture) VALUES

@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQ5NjQ1MTAsImV4cCI6MTc2NDk2ODExMH0.zZp6C7E9e634gSHZydGQAzEekEYmuhBXIo8rc9Rk120
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQ5ODQyNjQsImV4cCI6MTc2NDk4Nzg2NH0.0jPLTncWiU93wmYz3R17KBXKiSA_GLqpuw1WpotR8PQ
 
 ###
 
@@ -19,9 +19,29 @@ Authorization: Bearer {{token}}
 
 ###
 
+# create Client Account
+# @name createClientAccount
+POST {{baseUrl}}/users/client
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "cliente 1",
+  "email": "cliente1@gmail.com",
+  "password": "password"
+}
+
+###
+
 # list Tech Accounts
 # @name listTechAccounts
 GET {{baseUrl}}/users/techList
+Authorization: Bearer {{token}}
+
+###
+# list Client Accounts
+# @name listClientAccounts
+GET {{baseUrl}}/users/clientList
 Authorization: Bearer {{token}}
 
 ###
@@ -35,7 +55,37 @@ Authorization: Bearer {{token}}
 
 {
   "newName": "Tech test 99",
-  "newEmail": "test3@tech.com",
+  "newEmail": "test4@tech.com",
+  "newPassword": "tempPassword"
+}
+
+###
+
+# update Admin Account
+# @name updateAdminAccount
+PUT {{baseUrl}}/users/admin/8dfceb80-199c-488f-8918-a0609175399c
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "newName": "Admin atualizado",
+  "newEmail": "administrador@admin.com",
+  "newPassword": "hashed-password"
+}
+
+###
+
+# update Client Account
+# @name updateClientAccount
+PUT {{baseUrl}}/users/client/a290e17b-d0a3-4b36-b3dd-75a3e810be7b
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "newName": "Tech test 99",
+  "newEmail": "test3@client.com",
   "newPassword": "tempPassword"
 }
 
@@ -70,4 +120,10 @@ Content-Type: image/jpeg
 # get User Picture
 # @name getUserPicture
 GET {{baseUrl}}/users/picture/b9f0f153-4bc2-4576-9a8f-7b78762b2b37
+Authorization: Bearer {{token}}
+
+###
+# delete Client Account
+# @name deleteClientAccount
+DELETE {{baseUrl}}/users/client/47b5d176-924c-418c-8e3e-a58a7f175801
 Authorization: Bearer {{token}}

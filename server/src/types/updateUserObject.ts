@@ -1,5 +1,5 @@
 export type UpdateUserObject = {
-  newName: string,
-  newEmail: string,
-  newPassword: string
-};
+	newName: string
+	newEmail: string
+	newPassword: string
+}
