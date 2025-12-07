@@ -16,6 +16,6 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "administrador@admin.com",
-  "password": "hashed-password"
+  "email": "cliente1@gmail.com",
+  "password": "password"
 }

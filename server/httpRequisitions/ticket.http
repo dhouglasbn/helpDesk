@@ -1,0 +1,17 @@
+# Variables
+@baseUrl = http://localhost:3333
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyZmRkY2NlLWM3NmYtNDM2OS1iYzhhLTVmYjQzZGEwMjgzZSIsImVtYWlsIjoiY2xpZW50ZTFAZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTc2NTE0MDMwMywiZXhwIjoxNzY1MTQzOTAzfQ.9DMq3PmEugtyqtrHmlClSrHT49Rr5EJZl4aE_IMZUqU
+
+###
+
+# create service
+# @name createService
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "techId": "8717d531-97de-43f5-a1dd-e1bdcc20140d",
+  "servicesIds": ["33807cc5-731e-4bf4-888c-d56a27745ef5", "08bc85dc-e13f-472d-a156-4d6cc026934e"]
+}

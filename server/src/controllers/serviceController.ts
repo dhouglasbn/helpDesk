@@ -57,7 +57,7 @@ export default class ServiceController {
 
 	listServices = async (request: OurRequest, reply: Response) => {
 		if (!request.user?.role || request.user.role !== "admin") {
-			return reply.status(403).json({ message: "Acesso negado: Somente o admin pode desativar serviços dos técnicos." })
+			return reply.status(403).json({ message: "Acesso negado: Somente o admin pode listar serviços dos técnicos." })
 		}
 
 		try {
