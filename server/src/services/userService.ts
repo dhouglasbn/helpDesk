@@ -1,7 +1,9 @@
+// biome-ignore assist/source/organizeImports: <idontcare>
 import { db } from "../db/connection.ts"
 import { schema } from "../db/schema/index.ts"
 import bcrypt from "bcrypt"
 import { eq } from "drizzle-orm"
+import { sql } from 'drizzle-orm'
 import type { UpdateUserObject } from "../types/updateUserObject.ts"
 
 export default class UserService {
@@ -55,9 +57,21 @@ export default class UserService {
 	}
 
 	listTechAccounts = async () =>
-		await db.query.users.findMany({
-			where: eq(schema.users.role, "tech"),
+		await db.select({
+			id: schema.users.id,
+			name: schema.users.name,
+			email: schema.users.email,
+			passwordHash: schema.users.passwordHash,
+			role: schema.users.role,
+			availabilities: sql`array_agg(${schema.techniciansAvailabilities.time} ORDER BY ${schema.techniciansAvailabilities.time})`
 		})
+			.from(schema.users)
+			.leftJoin(
+				schema.techniciansAvailabilities,
+				eq(schema.techniciansAvailabilities.userId, schema.users.id)
+			)
+			.where(eq(schema.users.role, "tech"))
+			.groupBy(schema.users.id)
 
 	listClientAccounts = async () =>
 		await db.query.users.findMany({
@@ -168,7 +182,7 @@ export default class UserService {
 			})
 			.where(eq(schema.users.id, userId))
 
-		return "http://localhost:3333/users/picture/" + userId
+		return `http://localhost:3333/users/picture/${userId}`
 	}
 
 	getUserPicture = async (userId: string) => {

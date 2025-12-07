@@ -18,6 +18,7 @@ router.post(
 	),
 	serviceController.createService,
 )
+router.get("/list", authMiddleware, serviceController.listServices)
 router.put(
 	"/:id",
 	authMiddleware,

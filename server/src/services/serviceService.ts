@@ -43,4 +43,6 @@ export default class ServiceService {
 			.where(eq(schema.services.id, serviceId))
 			.returning()
 	}
+
+	listServices = async () => await db.query.services.findMany({ where: eq(schema.services.active, true) })
 }

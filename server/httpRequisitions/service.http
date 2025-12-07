@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQ5ODc5NDUsImV4cCI6MTc2NDk5MTU0NX0.exVZRdo1fy7hFoyN_9T9JrMRh18KlI5x2uLRtFU9Fdw
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUxMzM1MjYsImV4cCI6MTc2NTEzNzEyNn0.Va2KCGtYIze2HHyzoK6xg5enqb-szayFFdaNmphJJUI
 
 ###
 
@@ -15,6 +15,13 @@ Authorization: Bearer {{token}}
   "title": "Desentupir ralo",
   "price": 200.0
 }
+
+###
+
+# list Services
+# @name listServices
+GET {{baseUrl}}/services/list
+Authorization: Bearer {{token}}
 
 ###
 
