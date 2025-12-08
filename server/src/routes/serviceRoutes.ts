@@ -1,11 +1,11 @@
-import { Router } from "express"
-import { authMiddleware } from "../middlewares/authMiddleware.ts"
-import { validateZodSchema } from "../middlewares/validateDataMiddleware.ts"
-import { z } from "zod"
-import ServiceController from "../controllers/serviceController.ts"
+import { Router } from "express";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
+import { validateZodSchema } from "../middlewares/validateDataMiddleware.ts";
+import { z } from "zod";
+import ServiceController from "../controllers/serviceController.ts";
 
-const router = Router()
-const serviceController = new ServiceController()
+const router = Router();
+const serviceController = new ServiceController();
 
 router.post(
 	"/",
@@ -17,8 +17,8 @@ router.post(
 		}),
 	),
 	serviceController.createService,
-)
-router.get("/list", authMiddleware, serviceController.listServices)
+);
+router.get("/list", authMiddleware, serviceController.listServices);
 router.put(
 	"/:id",
 	authMiddleware,
@@ -28,21 +28,21 @@ router.put(
 			price: z.number().min(0, "O preço deve ser um número positivo"),
 		}),
 		z.object({
-			id: z.uuid()
-		})
+			id: z.uuid(),
+		}),
 	),
 	serviceController.updateService,
-)
-router.delete("/:id",
+);
+router.delete(
+	"/:id",
 	authMiddleware,
 	validateZodSchema(
 		z.undefined(),
 		z.object({
-			id: z.uuid()
-		})
+			id: z.uuid(),
+		}),
 	),
-	serviceController.deactivateService
-)
+	serviceController.deactivateService,
+);
 
-
-export { router as serviceRoutes }
+export { router as serviceRoutes };

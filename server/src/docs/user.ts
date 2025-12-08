@@ -1,19 +1,10 @@
-// src/docs/user.ts
-export const userDocs = `
-/**
- * @openapi
- * tags:
- *   - name: Users
- *     description: Rotas para gerenciamento de usuários (admins, técnicos e clientes)
- */
-
 /**
  * @openapi
  * /users/login:
  *   post:
- *     summary: Autenticação de usuário
  *     tags:
  *       - Users
+ *     summary: Realiza login e retorna o token JWT
  *     requestBody:
  *       required: true
  *       content:
@@ -29,17 +20,9 @@ export const userDocs = `
  *                 format: email
  *               password:
  *                 type: string
- *                 minLength: 6
  *     responses:
  *       200:
- *         description: Autenticação bem-sucedida
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
+ *         description: Login realizado
  *       400:
  *         description: Credenciais inválidas
  */
@@ -48,9 +31,9 @@ export const userDocs = `
  * @openapi
  * /users/tech:
  *   post:
- *     summary: Cria conta de técnico (somente admin)
  *     tags:
  *       - Users
+ *     summary: Cria conta de técnico (ADMIN)
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -66,304 +49,225 @@ export const userDocs = `
  *             properties:
  *               name:
  *                 type: string
- *                 minLength: 3
  *               email:
  *                 type: string
  *                 format: email
  *               password:
  *                 type: string
- *                 minLength: 6
  *     responses:
  *       201:
- *         description: Técnico criado com sucesso
- *       400:
- *         description: Erro de criação
+ *         description: Técnico criado
  *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
+ *         description: Não autorizado
  */
 
 /**
  * @openapi
  * /users/techList:
  *   get:
- *     summary: Lista todos os técnicos (somente admin)
  *     tags:
  *       - Users
+ *     summary: Lista contas de técnicos (ADMIN)
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Lista de técnicos
- *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
  */
 
 /**
  * @openapi
  * /users/tech/{id}:
  *   put:
- *     summary: Atualiza dados de um técnico
  *     tags:
  *       - Users
+ *     summary: Atualiza conta de técnico
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
- *         required: true
  *         schema:
  *           type: string
  *           format: uuid
+ *         required: true
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - newName
+ *               - newEmail
+ *               - newPassword
  *             properties:
  *               newName:
  *                 type: string
- *                 minLength: 3
  *               newEmail:
  *                 type: string
  *                 format: email
  *               newPassword:
  *                 type: string
- *                 minLength: 6
  *     responses:
  *       200:
  *         description: Técnico atualizado
- *       400:
- *         description: Erro de atualização
  *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
- *       404:
- *         description: Técnico não encontrado
+ *         description: Não autorizado
  */
 
 /**
  * @openapi
  * /users/techAvailabilities/{id}:
  *   put:
- *     summary: Atualiza horários disponíveis de um técnico
  *     tags:
  *       - Users
+ *     summary: Atualiza horários disponíveis do técnico
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
- *         required: true
  *         schema:
  *           type: string
  *           format: uuid
+ *         required: true
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - newAvailabilities
  *             properties:
  *               newAvailabilities:
  *                 type: array
  *                 items:
  *                   type: string
- *                   pattern: "^([01]\\d|2[0-3]):([0-5]\\d)$"
- *                 description: Horários no formato HH:MM
+ *                   example: "14:00"
  *     responses:
  *       200:
  *         description: Horários atualizados
- *       400:
- *         description: Erro de atualização
- *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
  */
 
 /**
  * @openapi
  * /users/admin/{id}:
  *   put:
- *     summary: Atualiza conta de admin
  *     tags:
  *       - Users
+ *     summary: Atualiza um administrador
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: id
- *         required: true
+ *       - name: id
+ *         in: path
  *         schema:
  *           type: string
  *           format: uuid
+ *         required: true
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             properties:
- *               newName:
- *                 type: string
- *                 minLength: 3
- *               newEmail:
- *                 type: string
- *                 format: email
- *               newPassword:
- *                 type: string
- *                 minLength: 6
+ *             required:
+ *               - newName
+ *               - newEmail
+ *               - newPassword
  *     responses:
  *       200:
  *         description: Admin atualizado
- *       400:
- *         description: Erro de atualização
- *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
  */
 
 /**
  * @openapi
  * /users/client:
  *   post:
- *     summary: Cria conta de cliente
  *     tags:
  *       - Users
+ *     summary: Cria conta de cliente
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 minLength: 3
- *               email:
- *                 type: string
- *                 format: email
- *               password:
- *                 type: string
- *                 minLength: 6
+ *             required:
+ *               - name
+ *               - email
+ *               - password
  *     responses:
  *       201:
  *         description: Cliente criado
- *       400:
- *         description: Erro de criação
  */
 
 /**
  * @openapi
  * /users/client/{id}:
  *   put:
- *     summary: Atualiza conta de cliente
  *     tags:
  *       - Users
+ *     summary: Atualiza conta de cliente
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: id
- *         required: true
+ *       - name: id
+ *         in: path
  *         schema:
  *           type: string
  *           format: uuid
+ *         required: true
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             properties:
- *               newName:
- *                 type: string
- *                 minLength: 3
- *               newEmail:
- *                 type: string
- *                 format: email
- *               newPassword:
- *                 type: string
- *                 minLength: 6
+ *             required:
+ *               - newName
+ *               - newEmail
+ *               - newPassword
  *     responses:
  *       200:
  *         description: Cliente atualizado
- *       400:
- *         description: Erro de atualização
- *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
- *       404:
- *         description: Cliente não encontrado
- */
-
-/**
- * @openapi
- * /users/clientList:
- *   get:
- *     summary: Lista todos os clientes (somente admin)
- *     tags:
- *       - Users
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Lista de clientes
- *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
  */
 
 /**
  * @openapi
  * /users/client/{id}:
  *   delete:
- *     summary: Deleta conta de cliente
  *     tags:
  *       - Users
+ *     summary: Deleta conta de cliente
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: id
- *         required: true
+ *       - name: id
+ *         in: path
  *         schema:
  *           type: string
  *           format: uuid
+ *         required: true
  *     responses:
  *       204:
- *         description: Cliente deletado com sucesso
- *       400:
- *         description: Erro ao deletar cliente
- *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
- *       404:
- *         description: Cliente não encontrado
+ *         description: Conta removida
  */
 
 /**
  * @openapi
  * /users/picture/{id}:
  *   put:
- *     summary: Atualiza foto de perfil de um usuário
  *     tags:
  *       - Users
+ *     summary: Atualiza a foto de um usuário
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         in: path
  *         required: true
  *         schema:
  *           type: string
@@ -374,6 +278,8 @@ export const userDocs = `
  *         multipart/form-data:
  *           schema:
  *             type: object
+ *             required:
+ *               - profilePic
  *             properties:
  *               profilePic:
  *                 type: string
@@ -381,47 +287,23 @@ export const userDocs = `
  *     responses:
  *       200:
  *         description: Foto atualizada
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 accessURL:
- *                   type: string
- *       400:
- *         description: Nenhum arquivo enviado ou erro
- *       403:
- *         description: Acesso negado
- *       401:
- *         description: Não autenticado
  */
 
 /**
  * @openapi
  * /users/picture/{id}:
  *   get:
- *     summary: Obtém foto de perfil de um usuário
  *     tags:
  *       - Users
+ *     summary: Retorna a foto do usuário
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         in: path
  *         required: true
  *         schema:
  *           type: string
  *           format: uuid
  *     responses:
  *       200:
- *         description: Foto do usuário
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 userPicture:
- *                   type: string
- *                   description: Conteúdo da foto em base64
- *       400:
- *         description: Erro ao buscar foto
+ *         description: Foto retornada
  */
-`;

@@ -1,16 +1,16 @@
-import { Router } from "express"
-import UserController from "../controllers/userController.ts"
-import { authMiddleware } from "../middlewares/authMiddleware.ts"
-import { validateZodSchema } from "../middlewares/validateDataMiddleware.ts"
-import { z } from "zod"
-import multer from "multer"
+import { Router } from "express";
+import UserController from "../controllers/userController.ts";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
+import { validateZodSchema } from "../middlewares/validateDataMiddleware.ts";
+import { z } from "zod";
+import multer from "multer";
 
-const router = Router()
-const userController = new UserController()
-const upload = multer({ storage: multer.memoryStorage() })
+const router = Router();
+const userController = new UserController();
+const upload = multer({ storage: multer.memoryStorage() });
 
 // login
-router.post("/login", userController.login)
+router.post("/login", userController.login);
 
 // CRUD tech accounts
 router.post(
@@ -24,8 +24,8 @@ router.post(
 		}),
 	),
 	userController.createTechAccount,
-)
-router.get("/techList", authMiddleware, userController.listTechAccounts)
+);
+router.get("/techList", authMiddleware, userController.listTechAccounts);
 router.put(
 	"/tech/:id",
 	authMiddleware,
@@ -40,7 +40,7 @@ router.put(
 		}),
 	),
 	userController.updateTechAccount,
-)
+);
 router.put(
 	"/techAvailabilities/:id",
 	authMiddleware,
@@ -59,7 +59,7 @@ router.put(
 		}),
 	),
 	userController.updateTechAvailabilities,
-)
+);
 
 router.put(
 	"/admin/:id",
@@ -75,7 +75,7 @@ router.put(
 		}),
 	),
 	userController.updateAdminAccount,
-)
+);
 
 // CRUD de clients
 router.post(
@@ -88,7 +88,7 @@ router.post(
 		}),
 	),
 	userController.createClientAccount,
-)
+);
 router.put(
 	"/client/:id",
 	authMiddleware,
@@ -103,8 +103,8 @@ router.put(
 		}),
 	),
 	userController.updateClientAccount,
-)
-router.get("/clientList", authMiddleware, userController.listClientAccounts)
+);
+router.get("/clientList", authMiddleware, userController.listClientAccounts);
 router.delete(
 	"/client/:id",
 	authMiddleware,
@@ -115,10 +115,15 @@ router.delete(
 		}),
 	),
 	userController.deleteClientAccount,
-)
+);
 
 // GET e UPLOAD da foto de usuário
-router.put("/picture/:id", authMiddleware, upload.single("profilePic"), userController.updateUserPicture)
-router.get("/picture/:id", userController.getUserPicture)
+router.put(
+	"/picture/:id",
+	authMiddleware,
+	upload.single("profilePic"),
+	userController.updateUserPicture,
+);
+router.get("/picture/:id", userController.getUserPicture);
 
-export { router as userRoutes }
+export { router as userRoutes };
