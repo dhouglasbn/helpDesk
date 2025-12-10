@@ -41,7 +41,7 @@
 
 # 🎯 Objetivo da Aplicação
 
-A API fornece recursos essenciais para um sistema de helpdesk interno:
+A API fornece recursos essenciais para um sistema de chamados de serviços de um técnico para um cliente:
 
 - Criação e autenticação de usuários
 - Registro e listagem de serviços
