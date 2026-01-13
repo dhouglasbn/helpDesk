@@ -3,10 +3,6 @@ import express, { type Express } from "express"
 import cors from "cors"
 import jwt from "jsonwebtoken"
 
-// Mock the env variables
-process.env.JWT_SECRET = "test-secret-key-for-testing"
-process.env.DATABASE_URL = "postgres://localhost:5432/test"
-
 import { userRoutes } from "../src/routes/userRoutes.ts"
 
 let app: Express

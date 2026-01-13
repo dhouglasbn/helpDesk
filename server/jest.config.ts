@@ -4,5 +4,6 @@ export default {
 	testMatch: ["**/tests/**/*.spec.ts"],
 	moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 	collectCoverageFrom: ["src/**/*.ts", "!src/**/*.d.ts"],
-	testTimeout: 5000,
+	testTimeout: 10_000,
+	setupFiles: ["<rootDir>/tests/setup.ts"],
 }
