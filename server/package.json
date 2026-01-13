@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "node --env-file .env --experimental-strip-types --watch --no-warnings src/server.ts",
     "test": "jest",
+    "test:cov": "jest --coverage",
     "db:generate": "npx drizzle-kit generate",
     "db:migrate": "npx drizzle-kit migrate",
     "db:seed": "node --env-file .env --experimental-strip-types --no-warnings src/db/seed.ts"
