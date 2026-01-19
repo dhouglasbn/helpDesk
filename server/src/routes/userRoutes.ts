@@ -109,7 +109,7 @@ router.delete(
 	"/client/:id",
 	authMiddleware,
 	validateZodSchema(
-		z.undefined(),
+		undefined,
 		z.object({
 			id: z.uuid(),
 		}),
@@ -120,10 +120,25 @@ router.delete(
 // GET e UPLOAD da foto de usuário
 router.put(
 	"/picture/:id",
-	authMiddleware,
 	upload.single("profilePic"),
+	authMiddleware,
+	validateZodSchema(
+		undefined,
+		z.object({
+			id: z.uuid(),
+		}),
+	),
 	userController.updateUserPicture,
 );
-router.get("/picture/:id", userController.getUserPicture);
+router.get(
+	"/picture/:id",
+	validateZodSchema(
+		undefined,
+		z.object({
+			id: z.uuid(),
+		}),
+	),
+	userController.getUserPicture,
+);
 
 export { router as userRoutes };
